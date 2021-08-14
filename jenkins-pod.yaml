@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccountName: cicd-deployer
+  imagePullSecrets:
+  - name: regcred
+  containers:
+    - name: node
+      image: docker.ftc-llc.net/build-node:1.0.0
+      command:
+        - sleep
+      args:
+        - infinity
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:v1.6.0-debug
+      imagePullPolicy: Always
+      command:
+        - sleep
+      args:
+        - 99d
+      volumeMounts:
+        - name: jenkins-docker-cfg
+          mountPath: /kaniko/.docker
+    - name: sonarqube
+      image: sonarsource/sonar-scanner-cli
+      imagePullPolicy: Always
+      env:
+        - name: SONAR_HOST_URL
+          value: "https://sonarqube.ftc-llc.net"
+        # TODO: remove this, but it can be revoked so minor issue.
+        - name: SONAR_LOGIN
+          value: "265af615d77f3c7e8ee736a930bbadb47f8b4716"
+      command:
+        - sleep
+      args:
+        - 99d
+    - name: curl-jq
+      image: badouralix/curl-jq:alpine
+      env:
+        # TODO: remove this, but it can be revoked so minor issue.
+        - name: SONAR_LOGIN
+          value: "265af615d77f3c7e8ee736a930bbadb47f8b4716"
+      command:
+        - sleep
+      args:
+        - 99d
+    - name: gitversion
+      image: docker.ftc-llc.net/gitversion:5.6.11
+      imagePullPolicy: Always
+      volumeMounts:
+        - mountPath: /gitversion
+          name: gitversion
+      command:
+        - sleep
+      args:
+        - infinity
+    - name: gitops
+      image: docker.ftc-llc.net/gitops:1.0.0
+      command:
+        - sleep
+        - infinity
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /gitversion
+          name: gitversion
+        - mountPath: /env-test
+          name: env-test
+        - mountPath: /env-prod
+          name: env-prod
+        - mountPath: /root/.gitconfig
+          name: github
+          subPath: .gitconfig
+        - mountPath: /root/.git-credentials
+          name: github
+          subPath: .git-credentials
+  volumes:
+    - name: jenkins-docker-cfg
+      secret:
+        secretName: regcred
+        items:
+          - key: .dockerconfigjson
+            path: config.json
+    - name: gitversion
+      emptyDir: {}
+    - name: env-test
+      emptyDir: {}
+    - name: env-prod
+      emptyDir: {}      
+    - name: github
+      secret:
+        secretName: github
