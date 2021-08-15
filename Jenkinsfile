@@ -10,7 +10,7 @@ pipeline {
             steps {
                 container('curl-jq') {
                     sh '''
-                        curl -X POST -H 'Content-type: application/json' --data '{"text":"Job started: ${JOB_NAME}"}' https://hooks.slack.com/services/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'
+                        curl -X POST -H 'Content-type: application/json' --data '{"text":"Job started: ${JOB_NAME}"}' https://hooks.slack.com/services/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
                     '''
                 }
             }   
@@ -140,14 +140,14 @@ pipeline {
     post {
        // only triggered when blue or green sign
        success {
-            sh '''#!bash
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"Job SUCCESS: ${JOB_NAME}"}' https://hooks.slack.com/services/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'
+            sh '''
+                curl -X POST -H 'Content-type: application/json' --data '{"text":"Job SUCCESS: ${JOB_NAME}"}' https://hooks.slack.com/services/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
             '''
        }
        // triggered when red sign
        failure {
-            sh '''#!bash
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"Job FAILED: ${JOB_NAME}"}' https://hooks.slack.com/services/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'
+            sh '''
+                curl -X POST -H 'Content-type: application/json' --data '{"text":"Job FAILED: ${JOB_NAME}"}' https://hooks.slack.com/services/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
             '''
        }
     }
