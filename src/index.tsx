@@ -1,26 +1,14 @@
 import { ColorModeScript } from '@chakra-ui/react';
-import { AuthClientTokens } from '@react-keycloak/core';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import { pluckUserValuesFromKeycloak } from 'src/features/user/utils/keycloak-user-utils';
 import { App } from './App';
 import './index.css';
 import keycloak from './keycloak';
 import reportWebVitals from './reportWebVitals';
 import { history, store } from './store/store';
-import { setUserData } from './store/user/user.actions';
-
-// TODO: Hunter - purify this a little more
-let currentToken: string | undefined;
-const handleTokenUpdate = (newToken: AuthClientTokens): void => {
-  if (currentToken !== newToken.token) {
-    currentToken = newToken.token;
-    // Only need to dispatch a new action with the token changes
-    store.dispatch(setUserData(pluckUserValuesFromKeycloak(keycloak)));
-  }
-};
+import { handleTokenUpdate } from './utils/token-helpers';
 
 ReactDOM.render(
   <React.StrictMode>

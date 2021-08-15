@@ -1,7 +1,7 @@
-import { Button, Link } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { useKeycloak } from '@react-keycloak/web';
 import React from 'react';
-import { Link as RouterLink, Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import { clearUserData } from 'src/store/user/user.actions';
 import { useAppDispatch } from 'src/utils/redux-hooks';
 
@@ -30,9 +30,6 @@ export function Login(): JSX.Element | null {
     <div>
       <Button onClick={login}>Login</Button>
       <Button onClick={logout}>Logout</Button>
-      <Link as={RouterLink} to='/playground'>
-        To Playground
-      </Link>
     </div>
   );
 }

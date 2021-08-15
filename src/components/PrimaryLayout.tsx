@@ -8,12 +8,16 @@ interface PrimaryLayoutProps {
 }
 export function PrimaryLayout({ children }: PrimaryLayoutProps): JSX.Element {
   return (
-    <Flex minH='100vh' flexDirection='column'>
-      <Navigation />
-      <Box flex={1} as='main'>
-        {children}
-      </Box>
-      <Footer />
+    <Flex w='100%' justifyContent='center'>
+      <Flex justifyContent='center' w='100%' maxW='1440px'>
+        <Flex minH='100vh' w='100%' flexDirection='column'>
+          <Navigation />
+          <Box px='10' flex={1} as='main'>
+            {children}
+          </Box>
+          <Footer />
+        </Flex>
+      </Flex>
     </Flex>
   );
 }

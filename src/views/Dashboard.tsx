@@ -14,7 +14,7 @@ import {
 import { CallStatus } from 'src/types/call-status';
 import { useAppSelector } from 'src/utils/redux-hooks';
 
-export function Home(): JSX.Element {
+export function Dashboard(): JSX.Element {
   const heroes = useAppSelector(selectHeroes);
   const heroesStatus = useAppSelector(selectHeroesStatus);
 
