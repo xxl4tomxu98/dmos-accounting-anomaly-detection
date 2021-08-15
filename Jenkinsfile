@@ -6,12 +6,18 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Notify') {
             steps {
-                container('node') {
+                container('curl-jq') {
                     sh '''#!/bin/bash
                         curl -X POST -H 'Content-type: application/json' --data '{"text":"Job started: ${JOB_NAME}"}' https://hooks.slack.com/services/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'
                     '''
+                }
+            }   
+        }
+        stage('Build') {
+            steps {
+                container('node') {
                     sh 'npm install'
                     sh 'npm run build'
                     sh 'npm test -- --watchAll=false --passWithNoTests'
