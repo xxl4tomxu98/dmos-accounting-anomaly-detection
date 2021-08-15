@@ -57,7 +57,7 @@ pipeline {
                 container('kaniko') {
                     sh '''
                         source `pwd`/gitversion
-                        /kaniko/executor -f `pwd`/docker/ui/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.ftc-llc.net/dmos/ui-template:${FULL_SEM_VER}
+                        /kaniko/executor -f `pwd`/docker/ui/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
                     '''
                 }
            }    
@@ -71,9 +71,9 @@ pipeline {
                         cd /env-test
                         git clone https://github.com/FTCLLC/pipeline-env-test.git .
                         cd bases
-                        kustomize edit set image docker.ftc-llc.net/dmos/ui-template=docker.ftc-llc.net/dmos/ui-template:${FULL_SEM_VER}
+                        kustomize edit set image docker.ftc-llc.net/dmos/elite-app=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
                         git add kustomization.yaml
-                        git commit -m "bump: update ui-template to ${FULL_SEM_VER}"
+                        git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
                         git push
                     '''
                 }
@@ -94,22 +94,22 @@ pipeline {
                     // The set +x prevent commands being echoed revealing the access token
                     sh '''
                         set +x
-                        [ $(curl -s -u ${SONAR_LOGIN}: https://sonarqube.ftc-llc.net/api/qualitygates/project_status?projectKey=blog.ftc-llc.net | jq -r ".projectStatus.status") == "OK" ] || exit 1
+                        [ $(curl -s -u ${SONAR_LOGIN}: https://sonarqube.ftc-llc.net/api/qualitygates/project_status?projectKey=com.ftcllc:dmos-elite-app | jq -r ".projectStatus.status") == "OK" ] || exit 1
                         set -x
                     '''
                 }
            }    
         }
-        stage('Functionl Tests') {
-            when { branch 'main' }
-            steps {
-                container('node') {
-                    sh '''#!/bin/bash
-                        echo "Put functional tests here!"
-                    '''
-                }
-            }   
-        }
+        // stage('Functionl Tests') {
+        //     when { branch 'main' }
+        //     steps {
+        //         container('node') {
+        //             sh '''#!/bin/bash
+        //                 echo "Put functional tests here!"
+        //             '''
+        //         }
+        //     }   
+        // }
         stage('Prod Deploy') {
             when { branch 'main' }
             steps {
@@ -119,9 +119,9 @@ pipeline {
                         cd /env-prod
                         git clone https://github.com/FTCLLC/pipeline-env-prod.git .
                         cd bases
-                        kustomize edit set image docker.ftc-llc.net/dmos/ui-template=docker.ftc-llc.net/dmos/ui-template:${FULL_SEM_VER}
+                        kustomize edit set image docker.ftc-llc.net/dmos/elite-app=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
                         git add kustomization.yaml
-                        git commit -m "bump: update ui-template to ${FULL_SEM_VER}"
+                        git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
                         git push
                     '''
                 }
