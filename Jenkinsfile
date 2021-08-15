@@ -132,6 +132,7 @@ pipeline {
                         git add kustomization.yaml
                         git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
                         git push
+                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to test"'"}' https://hooks.slack.com/services/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
                     '''
                 }
            }    
