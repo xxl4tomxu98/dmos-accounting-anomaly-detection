@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { clearUserData } from 'src/store/user/user.actions';
-import { Logo } from './Logo';
+import { Logo } from '../Logo';
 
 export function Navigation(): JSX.Element {
   const { keycloak } = useKeycloak();

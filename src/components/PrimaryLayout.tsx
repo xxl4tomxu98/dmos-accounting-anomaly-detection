@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { Footer } from './Footer';
-import { Navigation } from './Navigation';
+import { Navigation } from './Navigation/Navigation';
 
 interface PrimaryLayoutProps {
   children: ReactNode;

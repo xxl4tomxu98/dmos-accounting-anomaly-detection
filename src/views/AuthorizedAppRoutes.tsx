@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch as RouterSwitch } from 'react-router-dom';
-import { Dashboard } from './Dashboard/Dashboard';
+import { Dashboard } from './dashboard/Dashboard';
 
 export default function AuthorizedApp(): JSX.Element {
   const basePath = '/app';
