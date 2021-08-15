@@ -1,5 +1,6 @@
 import { Button, Flex, HStack, Link, LinkBox, Text } from '@chakra-ui/react';
 import { useKeycloak } from '@react-keycloak/web';
+import { push } from 'connected-react-router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -10,8 +11,9 @@ export function Navigation(): JSX.Element {
   const { keycloak } = useKeycloak();
   const dispatch = useDispatch();
   const logout = React.useCallback(() => {
-    keycloak?.logout();
     dispatch(clearUserData());
+    dispatch(push('/login'));
+    keycloak?.logout();
   }, [keycloak, dispatch]);
 
   const NavigationActions = React.useMemo(() => {
@@ -21,10 +23,10 @@ export function Navigation(): JSX.Element {
       <HStack spacing='3'>
         {authenticated ? (
           <>
-            <Link as={RouterLink} to={{ pathname: 'dashboard' }}>
+            <Link as={RouterLink} to={{ pathname: '../app/dashboard' }}>
               Dashboard
             </Link>
-            <Button onClick={logout} variant='solid' to='/login'>
+            <Button onClick={logout} variant='solid'>
               Logout
             </Button>
           </>
@@ -49,6 +51,7 @@ export function Navigation(): JSX.Element {
       h='120px'
       alignItems='center'
       justifyContent='space-between'
+      borderBottom='1px'
     >
       <LinkBox as={RouterLink} to='/home'>
         <HStack spacing='3'>
