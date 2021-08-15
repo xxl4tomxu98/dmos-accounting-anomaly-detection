@@ -5,6 +5,13 @@ spec:
   imagePullSecrets:
   - name: regcred
   containers:
+    - name: jnlp
+      env:
+        - name: SLACK_HOOK
+          valueFrom:
+            secretKeyRef:
+              name: slack-hook
+              key: slack-hook
     - name: node
       image: docker.ftc-llc.net/build-node:1.0.0
       command:
