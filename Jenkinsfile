@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 container('node') {
-                    sh '''#!bash
+                    sh'''#!bash
                         curl -X POST -H 'Content-type: application/json' --data '{"text":"Job started: ${JOB_NAME}"}' https://hooks.slack.com/services/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'
                     '''
                     sh 'npm install'
