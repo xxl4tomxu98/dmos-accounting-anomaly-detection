@@ -44,9 +44,18 @@ spec:
     - name: curl-jq
       image: badouralix/curl-jq:alpine
       env:
-        # TODO: remove this, but it can be revoked so minor issue.
+        - name: SONAR_HOST_URL
+          value: "https://sonarqube.ftc-llc.net"
         - name: SONAR_LOGIN
-          value: "265af615d77f3c7e8ee736a930bbadb47f8b4716"
+          valueFrom:
+            secretKeyRef:
+              name: sonarqube-token
+              key: token
+        - name: SLACK_HOOK
+          valueFrom:
+            secretKeyRef:
+              name: slack-hook
+              key: slack-hook
       command:
         - sleep
       args:
