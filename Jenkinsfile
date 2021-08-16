@@ -10,7 +10,7 @@ pipeline {
             steps {
                 container('curl-jq') {
                     sh '''
-                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job started: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                        curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job started: ${JOB_NAME}"'"}' ${SLACK_HOOK}
                     '''
                 }
             }   
@@ -71,7 +71,7 @@ pipeline {
             steps {
                 container('node') {
                     sh 'npm install'
-                    sh '''
+                    sh '''#!/bin/bash
                         source `pwd`/gitversion
                         npm version ${SEM_VER}
                     '''
@@ -164,13 +164,13 @@ pipeline {
        // only triggered when blue or green sign
        success {
             sh '''
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job SUCCESS: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job SUCCESS: ${JOB_NAME}"'"}' ${SLACK_HOOK}
             '''
        }
        // triggered when red sign
        failure {
             sh '''
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job FAILED: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job FAILED: ${JOB_NAME}"'"}' ${SLACK_HOOK}
             '''
        }
     }
