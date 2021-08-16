@@ -17,7 +17,7 @@ const token = (): [
   }
   return [getTokenValue, assignToken];
 };
-const [getTokenValue, assignToken] = token();
+export const [getTokenValue, assignToken] = token();
 export const handleTokenUpdate = (newToken: AuthClientTokens): void => {
   if (getTokenValue() !== newToken.token) {
     assignToken(newToken.token);

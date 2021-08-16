@@ -3,13 +3,13 @@ import { Redirect, Route, Switch as RouterSwitch } from 'react-router-dom';
 import { PageSpinner } from 'src/components/PageSpinner';
 import { PrimaryLayout } from 'src/components/PrimaryLayout';
 import { PrivateRoute } from 'src/components/PrivateRoute';
-import AuthorizedApp from './AuthorizedAppRoutes';
-import { Home } from './Home';
-import { Login } from './Login';
-import { PageNotFound } from './PageNotFound';
+import AuthorizedApp from '../AuthorizedAppRoutes';
+import { Home } from '../Home/Home';
+import { Login } from '../Login';
+import { PageNotFound } from '../PageNotFound';
 
 export function AppRoutes(): JSX.Element | null {
-  const { initialized } = useKeycloak();
+  const { initialized, keycloak } = useKeycloak();
 
   if (!initialized) {
     return <PageSpinner />;
@@ -17,7 +17,11 @@ export function AppRoutes(): JSX.Element | null {
   return (
     <PrimaryLayout>
       <RouterSwitch>
-        <Redirect exact from='/' to='/app' />
+        {keycloak.authenticated ? (
+          <Redirect exact from='/' to='/app' />
+        ) : (
+          <Redirect exact from='/' to='/home' />
+        )}
         <PrivateRoute path='/app' component={AuthorizedApp} />
         <Route path='/login' component={Login} />
         <Route path='/home' component={Home} />

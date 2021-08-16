@@ -3,7 +3,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorAlert } from './components/ErrorAlert';
-import { AppRoutes } from './views/AppRoutes';
+import { AppRoutes } from './views/AppRoutes/AppRoutes';
 
 interface AppProps {
   history: History;
