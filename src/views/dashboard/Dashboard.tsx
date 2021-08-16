@@ -38,7 +38,7 @@ export function Dashboard(): JSX.Element {
     <Box>
       <VStack alignItems='start' spacing='6'>
         <VStack alignItems='start' as='header' spacing='2'>
-          <Heading data-testid='page-heading' as='h1' size='xl'>
+          <Heading data-testid='page-heading' as='h1' size='2xl'>
             Dashboard
           </Heading>
           <Text as='p' size='md' color='gray.500'>
