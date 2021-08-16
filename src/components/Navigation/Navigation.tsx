@@ -53,7 +53,12 @@ export function Navigation(): JSX.Element {
       justifyContent='space-between'
       borderBottom='1px'
     >
-      <LinkBox as={RouterLink} to='/home'>
+      <LinkBox
+        as={RouterLink}
+        to={{
+          pathname: keycloak.authenticated ? '../app/dashboard' : '/home',
+        }}
+      >
         <HStack spacing='3'>
           <Logo />
           <Text fontSize='lg' fontWeight='bold'>

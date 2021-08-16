@@ -5,7 +5,7 @@ import { PrimaryLayout } from 'src/components/PrimaryLayout';
 import { PrivateRoute } from 'src/components/PrivateRoute';
 import AuthorizedApp from '../AuthorizedAppRoutes';
 import { Home } from '../Home/Home';
-import { Login } from '../Login';
+import { Login } from '../Login/Login';
 import { PageNotFound } from '../PageNotFound';
 
 export function AppRoutes(): JSX.Element | null {
