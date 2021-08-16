@@ -9,14 +9,20 @@ interface PrimaryLayoutProps {
 export function PrimaryLayout({ children }: PrimaryLayoutProps): JSX.Element {
   return (
     <Flex w='100%' justifyContent='center'>
-      <Flex justifyContent='center' w='100%' maxW='1440px'>
-        <Flex minH='100vh' w='100%' flexDirection='column'>
+      <Flex minH='100vh' flexDirection='column' alignItems='center' w='100%'>
+        <Flex
+          justifyContent='center'
+          flex={1}
+          maxW='1440px'
+          w='100%'
+          flexDirection='column'
+        >
           <Navigation />
           <Box px='10' pt='10' flex={1} as='main'>
             {children}
           </Box>
-          <Footer />
         </Flex>
+        <Footer />
       </Flex>
     </Flex>
   );
