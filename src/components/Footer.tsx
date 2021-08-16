@@ -1,5 +1,6 @@
 import { Box, Flex, HStack, Image, StackDivider, Text } from '@chakra-ui/react';
 
+// eslint-disable-next-line
 const appenv = (window as any)._env_;
 
 export function Footer(): JSX.Element {
