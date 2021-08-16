@@ -16,8 +16,7 @@ pipeline {
             }   
         }
         // When building a PR, we don't calculate the version, so build without the version update
-        stage('Build PR') {
-            when { changeRequest() }
+        stage('Build') {
             steps {
                 container('node') {
                     sh 'npm install'
@@ -65,29 +64,13 @@ pipeline {
                 }
             }   
         }
-        // Build injected the version
-        stage('Build SemVer') {
-            when { not { changeRequest() } }
-            steps {
-                container('node') {
-                    sh 'npm install'
-                    sh '''#!/bin/bash
-                        source `pwd`/gitversion
-                        echo "SemvVer: ${MAJOR_MINOR_PATCH}"
-                         npm version --no-commit-hooks -no-git-tag-version ${MAJOR_MINOR_PATCH}
-                    '''
-                    sh 'npm run build'
-                    sh 'npm run test:jenkins' 
-                }
-            }   
-        }
         stage('Package') {
             when { not { changeRequest() } }
             steps {
                 container('kaniko') {
                     sh '''
                         source `pwd`/gitversion
-                        /kaniko/executor -f `pwd`/docker/ui/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
+                        /kaniko/executor -f `pwd`/docker/ui/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --build-arg VERSION_ARG=${FULL_SEM_VER} --destination=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
                     '''
                 }
            }    
