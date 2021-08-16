@@ -21,7 +21,7 @@ export function Footer(): JSX.Element {
             </HStack>
           </Flex>
           <Text alignSelf='flex-end' color='gray.600'>
-            v{process.env.REACT_APP_VERSION ?? 'unknown'}
+            v{window._env_.DEPLOY_VER ?? 'unknown'}
           </Text>
         </Flex>
       </Flex>
