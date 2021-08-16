@@ -1,5 +1,7 @@
 import { Box, Flex, HStack, Image, StackDivider, Text } from '@chakra-ui/react';
 
+const appenv = (window as any)._env_;
+
 export function Footer(): JSX.Element {
   return (
     <Box pt='10' w='full' as='footer'>
@@ -21,7 +23,7 @@ export function Footer(): JSX.Element {
             </HStack>
           </Flex>
           <Text alignSelf='flex-end' color='gray.600'>
-            v{window._env_.DEPLOY_VER ?? 'unknown'}
+            v{appenv.DEPLOY_VER ?? 'unknown'}
           </Text>
         </Flex>
       </Flex>
