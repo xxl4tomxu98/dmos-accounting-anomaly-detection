@@ -11,7 +11,7 @@ pipeline {
                 container('node') {
                     sh 'npm install'
                     sh 'npm run build'
-                    sh 'npm test -- --watchAll=false --passWithNoTests'
+                    sh 'npm run test -- --coverage' 
                 }
             }   
         }
