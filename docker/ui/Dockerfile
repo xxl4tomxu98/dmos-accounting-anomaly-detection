@@ -14,7 +14,7 @@ COPY ./build /usr/share/nginx/html
 
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
-COPY ./gen-ev.sh .
+COPY ./gen-env.sh .
 
 # Make our shell script executable
 RUN chmod +x gen-env.sh
