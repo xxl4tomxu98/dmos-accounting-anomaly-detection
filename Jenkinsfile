@@ -10,12 +10,14 @@ pipeline {
             steps {
                 container('curl-jq') {
                     sh '''
-                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job started: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                        curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job started: ${JOB_NAME}"'"}' ${SLACK_HOOK}
                     '''
                 }
             }   
         }
-        stage('Build') {
+        // When building a PR, we don't calculate the version, so build without the version update
+        stage('Build PR') {
+            when { changeRequest() }
             steps {
                 container('node') {
                     sh 'npm install'
@@ -24,6 +26,7 @@ pipeline {
                 }
             }   
         }
+        // Calculate semver for features and main.
         stage('GitVersion Checkout') {
             when { not { changeRequest() } }
             steps {
@@ -38,6 +41,7 @@ pipeline {
                 }
             }
         }
+        // Change to the correct branch (for main this is redundant)
         stage('GitVersion Branch') {
             when { not { changeRequest() } }
             steps {
@@ -50,6 +54,7 @@ pipeline {
                 }
             }
         }
+        // Calculate the semver if NOT a PR
         stage('GitVersion') {
             when { not { changeRequest() } }
             steps {
@@ -57,6 +62,22 @@ pipeline {
                     sh '''
                         /tools/buildenv /gitversion `pwd`/gitversion
                     '''
+                }
+            }   
+        }
+        // Build injected the version
+        stage('Build SemVer') {
+            when { not { changeRequest() } }
+            steps {
+                container('node') {
+                    sh 'npm install'
+                    sh '''#!/bin/bash
+                        source `pwd`/gitversion
+                        echo "SemvVer: ${MAJOR_MINOR_PATCH}"
+                         npm version --no-commit-hooks -no-git-tag-version ${MAJOR_MINOR_PATCH}
+                    '''
+                    sh 'npm run build'
+                    sh 'npm run test:jenkins' 
                 }
             }   
         }
@@ -144,13 +165,13 @@ pipeline {
        // only triggered when blue or green sign
        success {
             sh '''
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job SUCCESS: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job SUCCESS: ${JOB_NAME}"'"}' ${SLACK_HOOK}
             '''
        }
        // triggered when red sign
        failure {
             sh '''
-                curl -X POST -H 'Content-type: application/json' --data '{"text":"'"Job FAILED: ${JOB_NAME}"'"}' ${SLACK_HOOK}
+                curl -s -X POST -H 'Content-type: application/json' --data '{"text":"'"Job FAILED: ${JOB_NAME}"'"}' ${SLACK_HOOK}
             '''
        }
     }
