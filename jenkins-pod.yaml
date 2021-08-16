@@ -79,6 +79,12 @@ spec:
         - infinity
     - name: gitops
       image: docker.ftc-llc.net/gitops:1.0.0
+      env:
+        - name: SLACK_HOOK
+          valueFrom:
+            secretKeyRef:
+              name: slack-hook
+              key: slack-hook
       command:
         - sleep
         - infinity

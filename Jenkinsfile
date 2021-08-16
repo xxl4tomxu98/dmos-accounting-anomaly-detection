@@ -84,6 +84,8 @@ pipeline {
                         git add kustomization.yaml
                         git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
                         git push
+                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to TEST"'"}' ${SLACK_HOOK}
+
                     '''
                 }
            }    
@@ -132,7 +134,7 @@ pipeline {
                         git add kustomization.yaml
                         git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
                         git push
-                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to test"'"}' ${SLACK_HOOK}
+                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to PROD"'"}' ${SLACK_HOOK}
                     '''
                 }
            }    
