@@ -74,7 +74,7 @@ pipeline {
                     sh '''#!/bin/bash
                         source `pwd`/gitversion
                         echo "SemvVer: ${MAJOR_MINOR_PATCH}"
-                        npm version --commit-hooks false ${MAJOR_MINOR_PATCH}
+                         npm version --no-commit-hooks -no-git-tag-version ${MAJOR_MINOR_PATCH}
                     '''
                     sh 'npm run build'
                     sh 'npm run test:jenkins' 
