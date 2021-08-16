@@ -73,8 +73,8 @@ pipeline {
                     sh 'npm install'
                     sh '''#!/bin/bash
                         source `pwd`/gitversion
-                        echo "SemvVer: ${SEM_VER}"
-                        npm version ${SEM_VER} --verbose
+                        echo "SemvVer: ${MAJOR_MINOR_PATCH}"
+                        npm version ${MAJOR_MINOR_PATCH} --verbose
                     '''
                     sh 'npm run build'
                     sh 'npm run test:jenkins' 
