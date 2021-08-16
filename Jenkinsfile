@@ -15,7 +15,9 @@ pipeline {
                 }
             }   
         }
-        stage('Build') {
+        // When building a PR, we don't calculate the version, so build without the version update
+        stage('Build PR') {
+            when { changeRequest() }
             steps {
                 container('node') {
                     sh 'npm install'
@@ -24,6 +26,7 @@ pipeline {
                 }
             }   
         }
+        // Calculate semver for features and main.
         stage('GitVersion Checkout') {
             when { not { changeRequest() } }
             steps {
@@ -38,6 +41,7 @@ pipeline {
                 }
             }
         }
+        // Change to the correct branch (for main this is redundant)
         stage('GitVersion Branch') {
             when { not { changeRequest() } }
             steps {
@@ -50,6 +54,7 @@ pipeline {
                 }
             }
         }
+        // Calculate the semver if NOT a PR
         stage('GitVersion') {
             when { not { changeRequest() } }
             steps {
@@ -57,6 +62,21 @@ pipeline {
                     sh '''
                         /tools/buildenv /gitversion `pwd`/gitversion
                     '''
+                }
+            }   
+        }
+        // Build injected the version
+        stage('Build SemVer') {
+            when { not { changeRequest() } }
+            steps {
+                container('node') {
+                    sh 'npm install'
+                    sh '''
+                        source `pwd`/gitversion
+                        npm version ${SEM_VER}
+                    '''
+                    sh 'npm run build'
+                    sh 'npm run test:jenkins' 
                 }
             }   
         }
