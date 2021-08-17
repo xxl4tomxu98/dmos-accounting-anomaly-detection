@@ -1,5 +1,8 @@
 import { Box, Flex, HStack, Image, StackDivider, Text } from '@chakra-ui/react';
 
+// eslint-disable-next-line
+const appenv = (window as any)._env_;
+
 export function Footer(): JSX.Element {
   return (
     <Box pt='10' w='full' as='footer'>
@@ -21,7 +24,7 @@ export function Footer(): JSX.Element {
             </HStack>
           </Flex>
           <Text alignSelf='flex-end' color='gray.600'>
-            v{process.env.REACT_APP_VERSION ?? 'unknown'}
+            v{appenv.DEPLOY_VER ?? 'unknown'}
           </Text>
         </Flex>
       </Flex>
