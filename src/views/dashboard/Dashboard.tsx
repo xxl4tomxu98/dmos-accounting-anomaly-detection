@@ -9,8 +9,9 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { ChartDataProvider } from 'src/context/ChartDataProvider';
 import { Analysis } from './Analysis';
-import { Insights } from './Insights/Insights';
+import { Insights } from './Insights';
 
 function DashboardTabs(): JSX.Element {
   return (
@@ -35,18 +36,20 @@ function DashboardTabs(): JSX.Element {
 
 export function Dashboard(): JSX.Element {
   return (
-    <Box>
-      <VStack alignItems='start' spacing='6'>
-        <VStack alignItems='start' as='header' spacing='2'>
-          <Heading data-testid='page-heading' as='h1' size='2xl'>
-            Dashboard
-          </Heading>
-          <Text as='p' size='md' color='gray.500'>
-            Learn from your financial data
-          </Text>
+    <ChartDataProvider>
+      <Box>
+        <VStack alignItems='start' spacing='6'>
+          <VStack alignItems='start' as='header' spacing='2'>
+            <Heading data-testid='page-heading' as='h1' size='2xl'>
+              Dashboard
+            </Heading>
+            <Text as='p' size='md' color='gray.500'>
+              Learn from your financial data
+            </Text>
+          </VStack>
+          <DashboardTabs />
         </VStack>
-        <DashboardTabs />
-      </VStack>
-    </Box>
+      </Box>
+    </ChartDataProvider>
   );
 }

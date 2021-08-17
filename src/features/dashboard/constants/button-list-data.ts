@@ -7,8 +7,8 @@ interface ButtonListItemData {
 
 export const BUTTON_LIST_ITEM_DATA: ButtonListItemData[] = [
   {
-    label: 'Line Chart',
-    chart: ChartTypes.LINE,
+    label: 'Bar Chart',
+    chart: ChartTypes.BAR,
   },
   {
     label: 'Pie Chart',
