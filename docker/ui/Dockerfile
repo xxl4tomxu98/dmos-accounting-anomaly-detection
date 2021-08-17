@@ -1,7 +1,7 @@
 FROM nginx:1.17.1-alpine
 
 ARG VERSION_ARG=0.0.0
-ENV REACT_APP_VERSION=$VERSION_ARG
+ENV DEPLOY_VER=$VERSION_ARG
 
 # Add bash
 RUN apk add --no-cache bash
