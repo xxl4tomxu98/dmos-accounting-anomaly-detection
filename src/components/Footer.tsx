@@ -16,7 +16,7 @@ export function Footer(): JSX.Element {
         >
           <Flex>
             <HStack divider={<StackDivider borderColor='black' />} spacing='4'>
-              <Image boxSize='35' src='/logo192.png' />
+              <Image boxSize='35' src='/logo192.png' alt='footer site logo' />
               <Text lineHeight='shorter'>
                 Elite Forensic
                 <br /> Accounting Agency
