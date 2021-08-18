@@ -102,19 +102,19 @@ pipeline {
                 }
            }    
         }
-        stage('Quality Gate') {
-            when { branch 'main' }
-            steps {   
-                container('curl-jq') {
-                    // The set +x prevent commands being echoed revealing the access token
-                    sh '''
-                        set +x
-                        [ $(curl -s -u ${SONAR_LOGIN}: https://sonarqube.ftc-llc.net/api/qualitygates/project_status?projectKey=com.ftcllc:dmos-elite-app | jq -r ".projectStatus.status") == "OK" ] || exit 1
-                        set -x
-                    '''
-                }
-           }    
-        }
+        // stage('Quality Gate') {
+        //     when { branch 'main' }
+        //     steps {   
+        //         container('curl-jq') {
+        //             // The set +x prevent commands being echoed revealing the access token
+        //             sh '''
+        //                 set +x
+        //                 [ $(curl -s -u ${SONAR_LOGIN}: https://sonarqube.ftc-llc.net/api/qualitygates/project_status?projectKey=com.ftcllc:dmos-elite-app | jq -r ".projectStatus.status") == "OK" ] || exit 1
+        //                 set -x
+        //             '''
+        //         }
+        //    }    
+        // }
         // stage('Functionl Tests') {
         //     when { branch 'main' }
         //     steps {
@@ -125,24 +125,24 @@ pipeline {
         //         }
         //     }   
         // }
-        stage('Prod Deploy') {
-            when { branch 'main' }
-            steps {
-                container('gitops') {
-                    sh '''#!/bin/bash
-                        source `pwd`/gitversion
-                        cd /env-prod
-                        git clone https://github.com/FTCLLC/pipeline-env-prod.git .
-                        cd bases
-                        kustomize edit set image docker.ftc-llc.net/dmos/elite-app=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
-                        git add kustomization.yaml
-                        git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
-                        git push
-                        curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to PROD"'"}' ${SLACK_HOOK}
-                    '''
-                }
-           }    
-        }
+        // stage('Prod Deploy') {
+        //     when { branch 'main' }
+        //     steps {
+        //         container('gitops') {
+        //             sh '''#!/bin/bash
+        //                 source `pwd`/gitversion
+        //                 cd /env-prod
+        //                 git clone https://github.com/FTCLLC/pipeline-env-prod.git .
+        //                 cd bases
+        //                 kustomize edit set image docker.ftc-llc.net/dmos/elite-app=docker.ftc-llc.net/dmos/elite-app:${FULL_SEM_VER}
+        //                 git add kustomization.yaml
+        //                 git commit -m "bump: update elite-app to ${FULL_SEM_VER}"
+        //                 git push
+        //                 curl -X POST -H 'Content-type: application/json' --data '{"text":"'"elite-app ${FULL_SEM_VER} deployed to PROD"'"}' ${SLACK_HOOK}
+        //             '''
+        //         }
+        //    }    
+        // }
     }
     post {
        // only triggered when blue or green sign
