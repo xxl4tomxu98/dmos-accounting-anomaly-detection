@@ -48,14 +48,14 @@ function InsightsChartContainer({
   );
 }
 
-const LazyLineChart = React.lazy(() => import('./charts/line-chart'));
-const LazyPieChart = React.lazy(() => import('./charts/pie-chart'));
+const LazyBarChart = React.lazy(() => import('./InsightsBarChart'));
+const LazyPieChart = React.lazy(() => import('./InsightsPieChart'));
 
-export function InsightsLineChartContainer(): JSX.Element {
+export function InsightsBarChartContainer(): JSX.Element {
   return (
     <InsightsChartContainer
-      viz={<LazyLineChart />}
-      title='Line Chart'
+      viz={<LazyBarChart />}
+      title='Bar Chart'
       subTitle='This is a subtitle'
       body='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
     />

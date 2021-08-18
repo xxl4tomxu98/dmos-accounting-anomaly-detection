@@ -1,10 +1,7 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
-import { useKeycloak } from '@react-keycloak/web';
-import { Redirect } from 'react-router-dom';
 
 export function Home(): JSX.Element {
-  const { keycloak } = useKeycloak();
-  return !keycloak.authenticated ? (
+  return (
     <Box>
       <Heading as='h1' textAlign='center' lineHeight='normal' size='3xl'>
         Simple Insights
@@ -14,11 +11,5 @@ export function Home(): JSX.Element {
         </Text>
       </Heading>
     </Box>
-  ) : (
-    <Redirect
-      to={{
-        pathname: '/app',
-      }}
-    />
   );
 }

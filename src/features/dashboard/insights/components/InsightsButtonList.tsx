@@ -1,7 +1,7 @@
 import { Box, Button, List, ListItem } from '@chakra-ui/react';
 import React from 'react';
-import { BUTTON_LIST_ITEM_DATA } from './constants/button-list-data';
-import { ChartTypes } from './enums/chart-types';
+import { BUTTON_LIST_ITEM_DATA } from '../../constants/button-list-data';
+import { ChartTypes } from '../../enums/chart-types';
 
 interface ButtonListState {
   currentIndex: number;

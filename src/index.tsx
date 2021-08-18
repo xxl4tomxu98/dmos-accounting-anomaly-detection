@@ -1,5 +1,6 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -7,8 +8,11 @@ import { App } from './App';
 import './index.css';
 import keycloak from './keycloak';
 import reportWebVitals from './reportWebVitals';
+import { setupAxios } from './setupAxios';
 import { history, store } from './store/store';
 import { handleTokenUpdate } from './utils/token-helpers';
+
+setupAxios(axios, store);
 
 ReactDOM.render(
   <React.StrictMode>

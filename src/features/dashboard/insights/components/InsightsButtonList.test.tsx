@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/dom';
 import { render } from 'src/test-utils';
-import { BUTTON_LIST_ITEM_DATA } from './constants/button-list-data';
-import { ChartTypes } from './enums/chart-types';
+import { BUTTON_LIST_ITEM_DATA } from '../../constants/button-list-data';
+import { ChartTypes } from '../../enums/chart-types';
 import { InsightsButtonList } from './InsightsButtonList';
 
 const fn = jest.fn();
