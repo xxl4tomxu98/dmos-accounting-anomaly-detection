@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useKeycloak } from '@react-keycloak/web';
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';

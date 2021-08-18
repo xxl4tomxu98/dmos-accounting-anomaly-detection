@@ -1,9 +1,9 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
-import { BUTTON_LIST_ITEM_DATA } from './constants/button-list-data';
-import { CHART_COMPONENT_DATA_MAP } from './constants/chart-component-data-map';
-import { ChartTypes } from './enums/chart-types';
-import { InsightsButtonList } from './InsightsButtonList';
+import { BUTTON_LIST_ITEM_DATA } from '../../features/dashboard/constants/button-list-data';
+import { CHART_COMPONENT_DATA_MAP } from '../../features/dashboard/constants/chart-component-data-map';
+import { ChartTypes } from '../../features/dashboard/enums/chart-types';
+import { InsightsButtonList } from '../../features/dashboard/insights/components/InsightsButtonList';
 
 export function Insights(): JSX.Element {
   const [currentChartType, set] = React.useState<ChartTypes>(
@@ -17,6 +17,7 @@ export function Insights(): JSX.Element {
   const chartContainer = React.useMemo(() => {
     return CHART_COMPONENT_DATA_MAP[currentChartType];
   }, [currentChartType]);
+
   return (
     <Box>
       <Grid columnGap='6' gridTemplateColumns='20rem 1fr'>

@@ -1,19 +1,14 @@
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
-import { useKeycloak } from '@react-keycloak/web';
-import { Redirect } from 'react-router-dom';
 
 export function Home(): JSX.Element {
-  const { keycloak } = useKeycloak();
-  return !keycloak.authenticated ? (
-    <Box w='50%' m='auto'>
-      <Heading as='h3' textAlign='center' lineHeight='normal' size='2xl'>
-        <Image
-          d='inline'
-          boxSize='100'
-          src='/home/home-1.jpg'
-          alt='home 1 logo'
-        />
-        Elite Forensic Accounting Agency
+  return (
+    <Box>
+      <Heading as='h1' textAlign='center' lineHeight='normal' size='3xl'>
+        Simple Insights
+        <br />
+        <Text as='span' color='purple.500'>
+          Bold Predictions
+        </Text>
       </Heading>
 
       <Text d='block' as='i' mt='3' textAlign='center'>
@@ -96,11 +91,5 @@ export function Home(): JSX.Element {
         problems and create business efficiency
       </Text>
     </Box>
-  ) : (
-    <Redirect
-      to={{
-        pathname: '/app',
-      }}
-    />
   );
 }
