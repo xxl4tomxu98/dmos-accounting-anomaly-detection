@@ -10,7 +10,7 @@ describe('Home Page Component', () => {
   it('Renders the page title', async () => {
     setup();
     const title = await screen.findByRole('heading');
-    expect(title).toHaveTextContent('Simple Insights');
+    expect(title).toHaveTextContent('Elite Forensic Accounting Agency');
   });
 });
 
