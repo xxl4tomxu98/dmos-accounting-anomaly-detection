@@ -1,4 +1,4 @@
-import { isUndefined } from 'lodash';
+import { isUndefined } from 'lodash/fp';
 import { assign, createMachine } from 'xstate';
 
 export interface DataFetchMachineContext<TResponseData> {
@@ -85,14 +85,6 @@ export const dataMachine = <TResponseData extends { [key: string]: any }>(
       },
     },
     {
-      services: {
-        fetchData: () => () => {
-          console.log('fetchData service was not provided');
-        },
-      },
-      guards: {
-        noData: (context, _event) => isUndefined(context.data),
-      },
       actions: {
         assignDataToContext: assign((_context, event) => {
           if (event.type !== 'RECEIVE_DATA') return {};
@@ -110,6 +102,9 @@ export const dataMachine = <TResponseData extends { [key: string]: any }>(
             errorMessage: event.data?.message || 'An unknown error occurred',
           };
         }),
+      },
+      guards: {
+        noData: (context, _event) => isUndefined(context.data),
       },
     },
   );

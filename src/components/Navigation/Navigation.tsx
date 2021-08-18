@@ -1,6 +1,5 @@
 import { Button, Flex, HStack, Link, LinkBox, Text } from '@chakra-ui/react';
 import { useKeycloak } from '@react-keycloak/web';
-import { push } from 'connected-react-router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -12,7 +11,6 @@ export function Navigation(): JSX.Element {
   const dispatch = useDispatch();
   const logout = React.useCallback(() => {
     dispatch(clearUserData());
-    dispatch(push('/login'));
     keycloak?.logout();
   }, [keycloak, dispatch]);
 

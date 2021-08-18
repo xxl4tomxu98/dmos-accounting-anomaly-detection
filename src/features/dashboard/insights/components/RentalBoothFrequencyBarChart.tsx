@@ -2,26 +2,26 @@ import { Box, Center, Spinner, Text } from '@chakra-ui/react';
 import { useActor } from '@xstate/react/lib/useActor';
 import React from 'react';
 import { ErrorComponent } from 'src/components/ErrorComponent';
-import { useChartContext } from 'src/context/ChartDataProvider';
+import { useChartDataContext } from 'src/context/ChartDataProvider';
 import { isNullish } from 'src/types/aliases-and-guards';
 import { VictoryBar, VictoryChart } from 'victory';
 import { barChartDataTransform } from '../utils/bar-chart-data-transform';
 
-export default function InsightsBarChart(): JSX.Element | null {
-  const { barChartService } = useChartContext();
-  const [state] = useActor(barChartService);
+export default function RentalBoothFrequencyBarChart(): JSX.Element | null {
+  const { rentalBoothFreqencyService } = useChartDataContext();
+  const [state] = useActor(rentalBoothFreqencyService);
 
   React.useEffect(() => {
-    barChartService.send({ type: 'FETCH' });
-  }, [barChartService]);
+    rentalBoothFreqencyService.send({ type: 'FETCH' });
+  }, [rentalBoothFreqencyService]);
 
   const handleRefresh = React.useCallback(() => {
-    barChartService.send({ type: 'REFRESH' });
-  }, [barChartService]);
+    rentalBoothFreqencyService.send({ type: 'REFRESH' });
+  }, [rentalBoothFreqencyService]);
 
   const chartData = React.useMemo(() => {
     if (!isNullish(state.context.data)) {
-      return barChartDataTransform(state.context.data) as any[];
+      return barChartDataTransform(state.context.data);
     }
     return [];
   }, [state]);
@@ -34,6 +34,10 @@ export default function InsightsBarChart(): JSX.Element | null {
             <VictoryChart>
               <VictoryBar
                 labels={({ datum }) => `Total: ${datum.y}`}
+                barWidth={10}
+                colorScale='warm'
+                padding={{ left: 25, right: 25 }}
+                style={{ labels: { fontSize: 12 }, data: { fontSize: 12 } }}
                 data={chartData}
               />
             </VictoryChart>

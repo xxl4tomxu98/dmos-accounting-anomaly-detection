@@ -1,28 +1,22 @@
-import {
-  entries,
-  get,
-  groupBy,
-  LodashTap1x1,
-  map,
-  pipe,
-  sumBy,
-  tap,
-} from 'lodash/fp';
-import { AccountEntriesResponse } from '../../models/account-entries.models';
+import { BarDatum } from '@nivo/bar';
+import { entries, flow, map, sortBy } from 'lodash/fp';
+import { AccountEntriesFrequencyResponse } from '../../models/account-entries.models';
 
-export const trace = (str: string): LodashTap1x1<unknown> =>
-  tap((x) => console.log(`== ${str}: ${JSON.stringify(x)}`));
-
-export function barChartDataTransform(data: AccountEntriesResponse): unknown {
-  return pipe(
-    get('content'),
-    groupBy('createDate'),
-    entries,
-    map(([key, val]) => {
-      return {
-        x: key,
-        y: sumBy('amount')(val),
-      };
-    }),
-  )(data);
+interface Coords {
+  x: string;
+  y: number;
+}
+const mapToCoords = (entries: [string, number][]): Coords[] => {
+  return map((entry: [string, number]) => ({
+    x: entry[0],
+    y: entry[1],
+  }))(entries);
+};
+const sortByDate = (arr: Coords[]): Coords[] => {
+  return sortBy<Coords>((obj) => new Date(obj.x))(arr);
+};
+export function barChartDataTransform(
+  data: AccountEntriesFrequencyResponse,
+): BarDatum[] {
+  return flow(entries, mapToCoords, sortByDate)(data);
 }

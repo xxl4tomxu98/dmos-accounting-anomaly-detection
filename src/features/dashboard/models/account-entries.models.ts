@@ -14,3 +14,7 @@ export interface AccountEntry {
 export enum Status {
   Paid = 'PAID',
 }
+
+export interface AccountEntriesFrequencyResponse {
+  [date: string]: number;
+}

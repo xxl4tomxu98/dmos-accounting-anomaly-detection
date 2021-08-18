@@ -1,8 +1,9 @@
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorAlert } from './components/ErrorAlert';
+import theme from './theme';
 import { AppRoutes } from './views/AppRoutes/AppRoutes';
 
 interface AppProps {

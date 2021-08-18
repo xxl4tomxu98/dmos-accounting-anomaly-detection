@@ -1,7 +1,7 @@
 import { Box, Button, List, ListItem } from '@chakra-ui/react';
 import React from 'react';
-import { INSIGHTS_BUTTON_LIST_ITEM_DATA } from '../../constants/button-list-data';
-import { InsightsContentTypes } from '../../enums/content-types';
+import { ANALYSIS_BUTTON_LIST_ITEM_DATA } from '../constants/button-list-data';
+import { AnalysisContentTypes } from '../enums/content-types';
 
 interface ButtonListState {
   currentIndex: number;
@@ -11,29 +11,26 @@ const initialButtonListState: ButtonListState = {
   currentIndex: 0,
 };
 
-interface InsightsButtonListProps {
-  setContentTypeFn: (content: InsightsContentTypes) => void;
+interface AnalysisButtonListProps {
+  setContentTypeFn: (content: AnalysisContentTypes) => void;
 }
-export function InsightsButtonList({
+export function AnalysisButtonList({
   setContentTypeFn,
-}: InsightsButtonListProps): JSX.Element {
+}: AnalysisButtonListProps): JSX.Element {
   const [buttonListState, set] = React.useState<ButtonListState>(
     initialButtonListState,
   );
 
-  const handleButtonClick = (idx: number, content: InsightsContentTypes) => {
+  const handleButtonClick = (idx: number, content: AnalysisContentTypes) => {
     set({ currentIndex: idx });
     setContentTypeFn(content);
   };
   return (
     <List>
-      {INSIGHTS_BUTTON_LIST_ITEM_DATA.map((item, idx) => (
+      {ANALYSIS_BUTTON_LIST_ITEM_DATA.map((item, idx) => (
         <ListItem key={item.content}>
           <Button
             w='full'
-            h='full'
-            whiteSpace='normal'
-            py='2'
             textAlign='left'
             onClick={() => handleButtonClick(idx, item.content)}
             variant='unstyled'

@@ -1,17 +1,22 @@
 import { useInterpret } from '@xstate/react';
 import React, { createContext, ReactNode } from 'react';
 import {
-  barChartDataMachine,
-  BarChartService,
-} from 'src/machines/bar-chart-data-machine';
+  accountingEntryFrequencyDataMachine,
+  AccountingEntryFrequencyService,
+} from 'src/machines/acc-entry-freq-data-machine';
+import {
+  rentalBoothFrequencyDataMachine,
+  RentalBoothFrequencyService,
+} from 'src/machines/rental-booth-freq-data-machine';
 
-interface ChartContextType {
-  barChartService: BarChartService;
+interface ChartDataContextType {
+  accountEntryFrequencyService: AccountingEntryFrequencyService;
+  rentalBoothFreqencyService: RentalBoothFrequencyService;
 }
 
-const ChartDataContext = createContext({} as ChartContextType);
+const ChartDataContext = createContext({} as ChartDataContextType);
 
-export function useChartContext(): ChartContextType {
+export function useChartDataContext(): ChartDataContextType {
   const context = React.useContext(ChartDataContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
@@ -25,10 +30,17 @@ interface ChartDataProviderProps {
 export const ChartDataProvider = ({
   children,
 }: ChartDataProviderProps): JSX.Element => {
-  const barChartService = useInterpret(barChartDataMachine);
+  const accountEntryFrequencyService = useInterpret(
+    accountingEntryFrequencyDataMachine,
+  );
+  const rentalBoothFreqencyService = useInterpret(
+    rentalBoothFrequencyDataMachine,
+  );
 
   return (
-    <ChartDataContext.Provider value={{ barChartService }}>
+    <ChartDataContext.Provider
+      value={{ accountEntryFrequencyService, rentalBoothFreqencyService }}
+    >
       {children}
     </ChartDataContext.Provider>
   );

@@ -1,32 +1,36 @@
 import { Box, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
-import { BUTTON_LIST_ITEM_DATA } from '../../features/dashboard/constants/button-list-data';
-import { CHART_COMPONENT_DATA_MAP } from '../../features/dashboard/constants/chart-component-data-map';
-import { ChartTypes } from '../../features/dashboard/enums/chart-types';
+import { INSIGHTS_BUTTON_LIST_ITEM_DATA } from '../../features/dashboard/constants/button-list-data';
+import { INSIGHTS_COMPONENT_DATA_MAP } from '../../features/dashboard/constants/component-data-maps';
+import { InsightsContentTypes } from '../../features/dashboard/enums/content-types';
 import { InsightsButtonList } from '../../features/dashboard/insights/components/InsightsButtonList';
 
 export function Insights(): JSX.Element {
-  const [currentChartType, set] = React.useState<ChartTypes>(
+  const [currentContentType, set] = React.useState<InsightsContentTypes>(
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    BUTTON_LIST_ITEM_DATA[0]!.chart,
+    INSIGHTS_BUTTON_LIST_ITEM_DATA[0]!.content,
   );
-  const setChartType = (chart: ChartTypes) => {
+  const setContentType = (chart: InsightsContentTypes) => {
     set(chart);
   };
 
-  const chartContainer = React.useMemo(() => {
-    return CHART_COMPONENT_DATA_MAP[currentChartType];
-  }, [currentChartType]);
+  const contentContainer = React.useMemo(() => {
+    return INSIGHTS_COMPONENT_DATA_MAP[currentContentType];
+  }, [currentContentType]);
 
   return (
-    <Box>
-      <Grid columnGap='6' gridTemplateColumns='20rem 1fr'>
+    <Box h='full'>
+      <Grid
+        h='full'
+        columnGap='6'
+        gridTemplateColumns='minmax(20rem, auto) 1fr'
+      >
         <GridItem>
-          <InsightsButtonList setChartTypeFn={setChartType} />
+          <InsightsButtonList setContentTypeFn={setContentType} />
         </GridItem>
         <GridItem>
-          <Box w='full' borderX='2px' borderColor='gray.200'>
-            {chartContainer}
+          <Box w='full' h='full' borderX='2px' borderColor='gray.200'>
+            {contentContainer}
           </Box>
         </GridItem>
       </Grid>

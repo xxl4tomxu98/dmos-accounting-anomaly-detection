@@ -3,6 +3,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { Redirect, useLocation } from 'react-router-dom';
+import { BaseRouteOnly } from 'src/components/BaseRouteOnly';
 
 export function Login(): JSX.Element | null {
   const location = useLocation<{ [key: string]: unknown }>();
@@ -23,21 +24,23 @@ export function Login(): JSX.Element | null {
   }
 
   return (
-    <VStack spacing='6'>
-      <Heading lineHeight='normal' as='h1' size='2xl' textAlign='center'>
-        Login To View <br /> Your Dashboard
-      </Heading>
-      <VStack>
-        <Button
-          onClick={login}
-          size='lg'
-          colorScheme='purple'
-          rightIcon={<FaArrowRight />}
-        >
-          Access Your Insights
-        </Button>
-        <Text color='#68778d'>You'll be redirected shortly</Text>
+    <BaseRouteOnly baseRoute='/login'>
+      <VStack spacing='6'>
+        <Heading lineHeight='normal' as='h1' size='2xl' textAlign='center'>
+          Login To View <br /> Your Dashboard
+        </Heading>
+        <VStack>
+          <Button
+            onClick={login}
+            size='lg'
+            colorScheme='purple'
+            rightIcon={<FaArrowRight />}
+          >
+            Access Your Insights
+          </Button>
+          <Text color='gray.500'>You'll be redirected shortly</Text>
+        </VStack>
       </VStack>
-    </VStack>
+    </BaseRouteOnly>
   );
 }

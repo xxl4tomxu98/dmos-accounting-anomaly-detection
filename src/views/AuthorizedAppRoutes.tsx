@@ -5,7 +5,6 @@ export default function AuthorizedApp(): JSX.Element {
   const basePath = '/app';
   return (
     <RouterSwitch>
-      {/* TODO: Hunter - create routes enum */}
       <Route path={`${basePath}/dashboard`}>
         <Dashboard />
       </Route>

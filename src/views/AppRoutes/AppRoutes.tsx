@@ -1,5 +1,10 @@
 import { useKeycloak } from '@react-keycloak/web';
-import { Redirect, Route, Switch as RouterSwitch } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  Switch as RouterSwitch,
+  useLocation,
+} from 'react-router-dom';
 import { PageSpinner } from 'src/components/PageSpinner';
 import { PrimaryLayout } from 'src/components/PrimaryLayout';
 import { PrivateRoute } from 'src/components/PrivateRoute';
@@ -10,6 +15,7 @@ import { PageNotFound } from '../PageNotFound';
 
 export function AppRoutes(): JSX.Element | null {
   const { initialized, keycloak } = useKeycloak();
+  const { pathname } = useLocation();
 
   if (!initialized) {
     return <PageSpinner />;
@@ -25,6 +31,7 @@ export function AppRoutes(): JSX.Element | null {
         <PrivateRoute path='/app' component={AuthorizedApp} />
         <Route path='/login' component={Login} />
         <Route path='/home' component={Home} />
+        <Redirect from='/:url*(/+)' to={pathname.slice(0, -1)} />
         <Route component={PageNotFound} />
       </RouterSwitch>
     </PrimaryLayout>
