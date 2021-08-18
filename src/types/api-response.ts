@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface PageableResponse<TContent extends { [key: string]: any }> {
   content: TContent[];
   pageable: Pageable;
