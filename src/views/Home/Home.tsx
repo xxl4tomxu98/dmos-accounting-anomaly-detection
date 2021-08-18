@@ -17,23 +17,23 @@ export function Home(): JSX.Element {
         "Working to solve the root cause"
       </Text>
 
-      <Text mt='10' mb='5'>
+      <Text mt='10' mb='5' fontSize='20'>
         Providing:
       </Text>
 
-      <Text mb='5'>
+      <Text mb='5' fontSize='20'>
         Accounting analysis to look beyond the numbers and deal with the
         business reality of a situation.
       </Text>
 
-      <Text mb='5'>
+      <Text mb='5' fontSize='20'>
         We collect, analyze, and evaluate evidential matters, interpret and
         communicate findings to our clients
       </Text>
 
-      <Text> Our Solutions Provide our Clients with:</Text>
+      <Text fontSize='20'> Our Solutions Provide our Clients with:</Text>
 
-      <Text>
+      <Text fontSize='16'>
         <Image
           d='inline'
           mr='2'
@@ -45,7 +45,7 @@ export function Home(): JSX.Element {
         High quality, secure and working solutions
       </Text>
 
-      <Text>
+      <Text fontSize='16'>
         <Image
           d='inline'
           mr='2'
@@ -57,7 +57,7 @@ export function Home(): JSX.Element {
         every aspect of your needs
       </Text>
 
-      <Text>
+      <Text fontSize='16'>
         <Image
           d='inline'
           mr='2'
@@ -69,7 +69,7 @@ export function Home(): JSX.Element {
         consistent and efficient results
       </Text>
 
-      <Text>
+      <Text fontSize='16'>
         <Image
           d='inline'
           mr='2'
@@ -81,7 +81,7 @@ export function Home(): JSX.Element {
         solutions result in high quality, secure and working solutions
       </Text>
 
-      <Text>
+      <Text fontSize='16'>
         <Image
           d='inline'
           mr='2'
