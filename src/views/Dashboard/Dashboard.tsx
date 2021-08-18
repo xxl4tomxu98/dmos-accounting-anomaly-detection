@@ -43,7 +43,7 @@ export function Dashboard(): JSX.Element {
             <Heading data-testid='page-heading' as='h1' size='2xl'>
               Dashboard
             </Heading>
-            <Text as='p' size='md' color='gray.500'>
+            <Text as='p' size='md' color='#68778d'>
               Learn from your financial data
             </Text>
           </VStack>
