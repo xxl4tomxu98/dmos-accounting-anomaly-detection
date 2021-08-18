@@ -65,7 +65,7 @@ export default function InsightsBarChart(): JSX.Element | null {
       default:
         return null;
     }
-  }, [state, handleRefresh]);
+  }, [state, handleRefresh, chartData]);
 
   return ChartUi;
 }
