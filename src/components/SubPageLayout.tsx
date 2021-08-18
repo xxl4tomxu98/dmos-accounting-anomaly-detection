@@ -35,6 +35,29 @@ function Graphic({ graphic, isLazy = true }: GraphicProps): JSX.Element {
     </Box>
   );
 }
+
+function MGraphic({ graphic, isLazy = true }: GraphicProps): JSX.Element {
+  return (
+    <Box>
+      <AspectRatio maxH='m'>
+        {isLazy ? (
+          <Suspense
+            fallback={
+              <Center>
+                <Spinner />
+              </Center>
+            }
+          >
+            {graphic}
+          </Suspense>
+        ) : (
+          <Center>{graphic}</Center>
+        )}
+      </AspectRatio>
+    </Box>
+  );
+}
+
 interface HeaderProps {
   title: string;
   subTitle: string;
@@ -65,6 +88,7 @@ interface SubPageLayoutComposed {
   Header: typeof Header;
   Body: typeof Body;
   Graphic: typeof Graphic;
+  MGraphic: typeof MGraphic;
 }
 const SubPageLayout: React.FC & SubPageLayoutComposed = ({ children }) => {
   return (
@@ -77,5 +101,6 @@ const SubPageLayout: React.FC & SubPageLayoutComposed = ({ children }) => {
 SubPageLayout.Header = Header;
 SubPageLayout.Body = Body;
 SubPageLayout.Graphic = Graphic;
+SubPageLayout.MGraphic = MGraphic;
 
 export { SubPageLayout };
