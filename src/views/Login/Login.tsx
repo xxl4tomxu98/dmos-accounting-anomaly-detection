@@ -36,7 +36,7 @@ export function Login(): JSX.Element | null {
         >
           Access Your Insights
         </Button>
-        <Text color='gray.500'>You'll be redirected shortly</Text>
+        <Text color='#68778d'>You'll be redirected shortly</Text>
       </VStack>
     </VStack>
   );
