@@ -28,7 +28,7 @@ export function RentalBoothAndAccountingEntriesTable(): JSX.Element {
           title={`${ContentTitles.RENTAL_BOOTH_TABLE}`}
           subTitle=''
         />
-        <Table variant='simple'>
+        <Table variant='simple' id='rental_booth_table'>
           <Thead>
             <Tr>
               <Th>#</Th>
@@ -77,7 +77,7 @@ export function RentalBoothAndAccountingEntriesTable(): JSX.Element {
           title={`${ContentTitles.ACCOUNT_ENTRY_TABLE}`}
           subTitle=''
         />
-        <Table variant='simple'>
+        <Table variant='simple' id='account_entry_table'>
           <Thead>
             <Tr>
               <Th>#</Th>
@@ -88,6 +88,10 @@ export function RentalBoothAndAccountingEntriesTable(): JSX.Element {
             <Tr>
               <Td isNumeric>2,144,200</Td>
               <Td>Total Records</Td>
+            </Tr>
+            <Tr color='white'>
+              <Td> PLACEHOLDER </Td>
+              <Td></Td>
             </Tr>
             <Tr>
               <Td isNumeric>1,598,938</Td>
