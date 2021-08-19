@@ -94,14 +94,15 @@ pipeline {
                 }
            }    
         }
-        // stage('Scan') {
-        //     when { branch 'main' }
-        //     steps {
-        //         container('sonarqube') {
-        //             sh 'sonar-scanner -Dsonar.login=${SONAR_LOGIN}'
-        //         }
-        //    }    
-        // }
+        stage('Scan') {
+            when { branch 'main' }
+            steps {
+                container('sonarqube') {
+                    sh 'sonar-scanner -Dsonar.login=${SONAR_LOGIN}'
+                }
+           }    
+        }
+        // Moved to deployment Pipeline
         // stage('Quality Gate') {
         //     when { branch 'main' }
         //     steps {   
