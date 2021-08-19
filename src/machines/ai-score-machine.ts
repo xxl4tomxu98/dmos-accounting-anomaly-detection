@@ -1,10 +1,11 @@
-import { catchError, delay, mergeMap, of } from 'rxjs';
+import axios from 'axios';
+import { catchError, delay, from, mergeMap, of } from 'rxjs';
 import { assign, createMachine } from 'xstate';
 
 export interface AiScoreMachineContext {
   data: {
-    score: number | undefined;
-    description: string | undefined;
+    anomalyCount: number | undefined;
+    createDate: string | undefined;
   };
   errorMessage?: string | undefined;
 }
@@ -32,8 +33,8 @@ export const aiScoreMachine = createMachine<
     id: 'ai-score-machine',
     context: {
       data: {
-        score: undefined,
-        description: '--',
+        anomalyCount: undefined,
+        createDate: '--',
       },
     },
     initial: 'idle',
@@ -94,17 +95,23 @@ export const aiScoreMachine = createMachine<
       }),
       resetContext: assign((_context) => ({
         data: {
-          score: undefined,
-          description: undefined,
+          anomalyCount: undefined,
+          createDate: undefined,
         },
       })),
     },
     services: {
       fetchData: (_context, _event) => {
-        return of({
-          score: 50,
-          description: 'Meh.',
-        }).pipe(
+        return from(
+          axios.get<AiScoreMachineContext>(
+            '/dmos/api/reports/anomalyScoreCountByMonth',
+            {
+              params: {
+                anomalyScore: 1.3511,
+              },
+            },
+          ),
+        ).pipe(
           mergeMap((data) => {
             return of({ type: 'RECEIVE_DATA', data: { data } });
           }),
