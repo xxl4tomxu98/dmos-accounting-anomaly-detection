@@ -26,7 +26,7 @@ export function RentalBoothAndAccountingEntriesTable(): JSX.Element {
       <Box>
         <SubPageLayout.Header
           title={`${ContentTitles.RENTAL_BOOTH_TABLE}`}
-          subTitle='This is a subtitle'
+          subTitle=''
         />
         <Table variant='simple'>
           <Thead>
@@ -75,7 +75,7 @@ export function RentalBoothAndAccountingEntriesTable(): JSX.Element {
       <Box>
         <SubPageLayout.Header
           title={`${ContentTitles.ACCOUNT_ENTRY_TABLE}`}
-          subTitle='This is a subtitle'
+          subTitle=''
         />
         <Table variant='simple'>
           <Thead>
@@ -136,15 +136,10 @@ export function AccountEntriesChartContainer(): JSX.Element {
       />
       <SubPageLayout.Header
         title={`${ContentTitles.ACCOUNT_ENTRY_FREQUENCY}`}
-        subTitle='This is a subtitle'
+        subTitle=''
       />
       <SubPageLayout.Body>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
+        <Text></Text>
       </SubPageLayout.Body>
     </SubPageLayout>
   );
@@ -160,15 +155,10 @@ export function StaticAnalysisContainer(): JSX.Element {
 
       <SubPageLayout.Header
         title={`${ContentTitles.RENTAL_BOOTH_AND_ACCOUNTING}`}
-        subTitle='This is a subtitle'
+        subTitle=''
       />
       <SubPageLayout.Body>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
+        <Text></Text>
       </SubPageLayout.Body>
     </SubPageLayout>
   );
@@ -180,15 +170,10 @@ export function RentalDataChartContainer(): JSX.Element {
       <SubPageLayout.Graphic graphic={<LazyRentalBoothFrequencyBarChart />} />
       <SubPageLayout.Header
         title={`${ContentTitles.RENTAL_BOOTH_FREQUENCY}`}
-        subTitle='This is a subtitle'
+        subTitle=''
       />
       <SubPageLayout.Body>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
+        <Text></Text>
       </SubPageLayout.Body>
     </SubPageLayout>
   );

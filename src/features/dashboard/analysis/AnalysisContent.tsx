@@ -53,7 +53,7 @@ export function AiAnalysisContainer(): JSX.Element {
     <SubPageLayout>
       <SubPageLayout.Header
         title={`${ContentTitles.AI_ANALYSIS}`}
-        subTitle='This is a subtitle'
+        subTitle=''
       />
       <VStack w='full' spacing='6'>
         <Box w='full'>
@@ -121,15 +121,10 @@ export function AiAnalysisFrequencyChartContainer(): JSX.Element {
       />
       <SubPageLayout.Header
         title={`${ContentTitles.AI_ANALYSIS_FREQUENCY}`}
-        subTitle='This is a subtitle'
+        subTitle=''
       />
       <SubPageLayout.Body>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
+        <Text></Text>
       </SubPageLayout.Body>
     </SubPageLayout>
   );
