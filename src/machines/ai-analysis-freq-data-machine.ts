@@ -1,14 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { catchError, from, mergeMap, of } from 'rxjs';
 import { AccountEntriesFrequencyResponse } from 'src/features/dashboard/models/account-entries.models';
 import { ActorRefFrom } from 'xstate';
 import { dataMachine } from './data-machine';
 
-export interface AiScoreFrequencyMachineContext {
-  anomalyCount: number | undefined;
-  createDate: string | undefined;
-}
-// TODO: Change data model and endpoint when ready
 export const aiAnalysisFrequencyDataMachine =
   dataMachine<AccountEntriesFrequencyResponse>(
     'ai-analysis-frequency-data',
@@ -16,7 +11,7 @@ export const aiAnalysisFrequencyDataMachine =
     services: {
       fetchData: (_context, _event) => {
         return from(
-          axios.get<AiScoreFrequencyMachineContext>(
+          axios.get<AccountEntriesFrequencyResponse>(
             '/dmos/api/reports/anomalyScoreCountByMonth',
             {
               params: {
@@ -25,7 +20,7 @@ export const aiAnalysisFrequencyDataMachine =
             },
           ),
         ).pipe(
-          mergeMap((res) => {
+          mergeMap((res: AxiosResponse<AccountEntriesFrequencyResponse>) => {
             return of({ type: 'RECEIVE_DATA', data: res.data });
           }),
           catchError((err: Error) => {
