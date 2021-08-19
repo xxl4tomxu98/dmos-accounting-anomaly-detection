@@ -5,6 +5,7 @@ import {
   TableCaption,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
@@ -17,7 +18,6 @@ import { aiScoreMachine } from 'src/machines/ai-score-machine';
 import { isNullish } from 'src/types/aliases-and-guards';
 import { ContentTitles } from '../constants/content-titles';
 import { Score } from './Score';
-
 const scoreExists = (score: number | undefined): score is number => {
   return !isNullish(score);
 };
@@ -105,6 +105,32 @@ export function AiAnalysisContainer(): JSX.Element {
           </VStack>
         </Box>
       </VStack>
+    </SubPageLayout>
+  );
+}
+
+const LazyAiAnalysisFrequencyBarChart = React.lazy(
+  () => import('./AiAnalysisFrequencyBarChart'),
+);
+export function AiAnalysisFrequencyChartContainer(): JSX.Element {
+  return (
+    <SubPageLayout>
+      <SubPageLayout.Graphic
+        isLazy
+        graphic={<LazyAiAnalysisFrequencyBarChart />}
+      />
+      <SubPageLayout.Header
+        title={`${ContentTitles.AI_ANALYSIS_FREQUENCY}`}
+        subTitle='This is a subtitle'
+      />
+      <SubPageLayout.Body>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </Text>
+      </SubPageLayout.Body>
     </SubPageLayout>
   );
 }

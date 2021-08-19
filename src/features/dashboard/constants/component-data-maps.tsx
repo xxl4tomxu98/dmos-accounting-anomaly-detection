@@ -1,5 +1,8 @@
 import React from 'react';
-import { AiAnalysisContainer } from '../analysis/AnalysisContent';
+import {
+  AiAnalysisContainer,
+  AiAnalysisFrequencyChartContainer,
+} from '../analysis/AnalysisContent';
 import {
   AnalysisContentTypes,
   InsightsContentTypes,
@@ -24,4 +27,5 @@ export const ANALYSIS_COMPONENT_DATA_MAP: Record<
   React.ReactElement
 > = {
   AI_ANALYSIS: <AiAnalysisContainer />,
+  AI_ANALYSIS_FREQUENCY: <AiAnalysisFrequencyChartContainer />,
 };

@@ -6,4 +6,5 @@ export enum InsightsContentTypes {
 
 export enum AnalysisContentTypes {
   AI_ANALYSIS = 'AI_ANALYSIS',
+  AI_ANALYSIS_FREQUENCY = 'AI_ANALYSIS_FREQUENCY',
 }

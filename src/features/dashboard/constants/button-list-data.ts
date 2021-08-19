@@ -30,4 +30,8 @@ export const ANALYSIS_BUTTON_LIST_ITEM_DATA: ButtonListItemData<AnalysisContentT
       label: 'AI Analysis',
       content: AnalysisContentTypes.AI_ANALYSIS,
     },
+    {
+      label: 'AI Analysis Frequency Chart',
+      content: AnalysisContentTypes.AI_ANALYSIS_FREQUENCY,
+    },
   ];

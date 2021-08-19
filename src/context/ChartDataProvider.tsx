@@ -5,6 +5,10 @@ import {
   AccountingEntryFrequencyService,
 } from 'src/machines/acc-entry-freq-data-machine';
 import {
+  aiAnalysisFrequencyDataMachine,
+  AiAnalysisFrequencyService,
+} from 'src/machines/ai-analysis-freq-data-machine';
+import {
   rentalBoothFrequencyDataMachine,
   RentalBoothFrequencyService,
 } from 'src/machines/rental-booth-freq-data-machine';
@@ -12,6 +16,7 @@ import {
 interface ChartDataContextType {
   accountEntryFrequencyService: AccountingEntryFrequencyService;
   rentalBoothFreqencyService: RentalBoothFrequencyService;
+  aiAnalysisFrequencyService: AiAnalysisFrequencyService;
 }
 
 const ChartDataContext = createContext({} as ChartDataContextType);
@@ -36,10 +41,17 @@ export const ChartDataProvider = ({
   const rentalBoothFreqencyService = useInterpret(
     rentalBoothFrequencyDataMachine,
   );
+  const aiAnalysisFrequencyService = useInterpret(
+    aiAnalysisFrequencyDataMachine,
+  );
 
   return (
     <ChartDataContext.Provider
-      value={{ accountEntryFrequencyService, rentalBoothFreqencyService }}
+      value={{
+        accountEntryFrequencyService,
+        rentalBoothFreqencyService,
+        aiAnalysisFrequencyService,
+      }}
     >
       {children}
     </ChartDataContext.Provider>
