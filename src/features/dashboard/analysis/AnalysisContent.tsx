@@ -25,16 +25,16 @@ export function AiAnalysisContainer(): JSX.Element {
   const [current, send] = useMachine(aiScoreMachine);
 
   const variant = React.useMemo(() => {
-    if (scoreExists(current.context.data?.score)) {
+    if (scoreExists(current.context.data?.anomalyCount)) {
       switch (true) {
-        case current.context.data.score >= 75: {
+        case current.context.data.anomalyCount >= 75: {
           return 'positive';
         }
-        case current.context.data.score <= 25: {
+        case current.context.data.anomalyCount <= 25: {
           return 'negative';
         }
-        case current.context.data.score > 25 &&
-          current.context.data?.score < 75: {
+        case current.context.data.anomalyCount > 25 &&
+          current.context.data?.anomalyCount < 75: {
           return 'medium';
         }
         default:
@@ -94,8 +94,8 @@ export function AiAnalysisContainer(): JSX.Element {
             spacing='6'
           >
             <Score
-              score={current.context.data.score}
-              description={current.context.data.description}
+              score={current.context.data.anomalyCount}
+              description={current.context.data.createDate}
               isLoading={current.matches('fetching')}
               variant={variant}
             />
