@@ -3,4 +3,6 @@ export enum ContentTitles {
   RENTAL_BOOTH_FREQUENCY = 'Rental Booth Frequency Distribution',
   ACCOUNT_ENTRY_FREQUENCY = 'Accounting Entry Frequency Distribution',
   AI_ANALYSIS = 'AI Analysis',
+  RENTAL_BOOTH_TABLE = 'Rental Booth',
+  ACCOUNT_ENTRY_TABLE = 'Accounting Entries',
 }
