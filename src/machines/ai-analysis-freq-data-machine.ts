@@ -4,6 +4,10 @@ import { AccountEntriesFrequencyResponse } from 'src/features/dashboard/models/a
 import { ActorRefFrom } from 'xstate';
 import { dataMachine } from './data-machine';
 
+export interface AiScoreFrequencyMachineContext {
+  anomalyCount: number | undefined;
+  createDate: string | undefined;
+}
 // TODO: Change data model and endpoint when ready
 export const aiAnalysisFrequencyDataMachine =
   dataMachine<AccountEntriesFrequencyResponse>(
@@ -12,8 +16,13 @@ export const aiAnalysisFrequencyDataMachine =
     services: {
       fetchData: (_context, _event) => {
         return from(
-          axios.get<AccountEntriesFrequencyResponse>(
-            '/dmos/api/accountEntries/frequency',
+          axios.get<AiScoreFrequencyMachineContext>(
+            '/dmos/api/reports/anomalyScoreCountByMonth',
+            {
+              params: {
+                anomalyScore: 1.3511,
+              },
+            },
           ),
         ).pipe(
           mergeMap((res) => {

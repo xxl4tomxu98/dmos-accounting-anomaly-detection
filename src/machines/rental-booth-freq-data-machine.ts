@@ -13,7 +13,7 @@ export const rentalBoothFrequencyDataMachine =
       fetchData: (_context, _event) => {
         return from(
           axios.get<AccountEntriesFrequencyResponse>(
-            '/dmos/api/accountEntries/frequency',
+            '/dmos/api/rentalBooth/frequency',
           ),
         ).pipe(
           mergeMap((res) => {
