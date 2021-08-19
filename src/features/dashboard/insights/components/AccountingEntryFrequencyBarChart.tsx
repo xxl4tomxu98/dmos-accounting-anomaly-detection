@@ -4,7 +4,7 @@ import React from 'react';
 import { ErrorComponent } from 'src/components/ErrorComponent';
 import { useChartDataContext } from 'src/context/ChartDataProvider';
 import { isNullish } from 'src/types/aliases-and-guards';
-import { VictoryBar, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryLabel } from 'victory';
 import { barChartDataTransform } from '../utils/bar-chart-data-transform';
 
 export default function AccountingEntryFrequencyBarChart(): JSX.Element | null {
@@ -34,13 +34,14 @@ export default function AccountingEntryFrequencyBarChart(): JSX.Element | null {
           <Box w='full'>
             <VictoryChart>
               <VictoryBar
-                labels={({ datum }) => `Total: ${datum.y}`}
+                labels={({ datum }) => `${datum.y}`}
                 barWidth={10}
                 colorScale='warm'
                 padding={{ left: 25, right: 25 }}
                 style={{ labels: { fontSize: 12 }, data: { fontSize: 12 } }}
                 data={chartData}
               />
+              <VictoryAxis tickLabelComponent={<VictoryLabel angle={90} />} />
             </VictoryChart>
           </Box>
         );
